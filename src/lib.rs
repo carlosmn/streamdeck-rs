@@ -2,6 +2,7 @@
 pub mod logging;
 pub mod manifest;
 pub mod registration;
+pub mod runner;
 pub mod socket;
 
 pub use crate::manifest::Manifest;
