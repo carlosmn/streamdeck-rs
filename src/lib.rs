@@ -2,6 +2,7 @@
 pub mod logging;
 pub mod manifest;
 pub mod registration;
+pub mod runner;
 #[cfg(feature = "tokio-tungstenite")]
 pub mod socket;
 
