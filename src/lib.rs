@@ -1,9 +1,11 @@
 #[cfg(feature = "logging")]
 pub mod logging;
+pub mod manifest;
 pub mod registration;
 #[cfg(feature = "tokio-tungstenite")]
 pub mod socket;
 
+pub use crate::manifest::Manifest;
 pub use crate::registration::RegistrationInfo;
 #[cfg(feature = "tokio-tungstenite")]
 pub use crate::socket::StreamDeckSocket;
