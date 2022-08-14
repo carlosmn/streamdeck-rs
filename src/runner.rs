@@ -20,3 +20,12 @@ pub type Message = crate::Message<Value, Value, Value>;
 ///
 /// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/events-sent/)
 pub type MessageIn = crate::MessageOut<Value, Value, Value>;
+
+/// The message sent from the plugin during registration
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Registration {
+    /// Event as was passed in to the plugin during startup
+    pub event: String,
+    /// UUID as passed in to the plugin during startup
+    pub uuid: String,
+}
