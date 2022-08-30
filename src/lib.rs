@@ -1,6 +1,7 @@
 #[cfg(feature = "logging")]
 pub mod logging;
 pub mod manifest;
+pub mod property_inspector;
 pub mod registration;
 pub mod runner;
 #[cfg(feature = "tokio-tungstenite")]
