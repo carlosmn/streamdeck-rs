@@ -1,6 +1,6 @@
 use super::{Color, DeviceSize, DeviceType};
 use failure::Fail;
-use serde::de;
+use serde::{de, ser};
 use serde_derive::{Deserialize, Serialize};
 use std::fmt;
 use std::str::FromStr;
@@ -73,6 +73,7 @@ impl<'de> de::Deserialize<'de> for Language {
 }
 
 /// The platform on which the Stream Deck software is running.
+#[derive(Debug)]
 pub enum Platform {
     /// Mac OS X
     Mac,
@@ -80,6 +81,21 @@ pub enum Platform {
     Windows,
     /// A platform not documented in the 4.0.0 SDK.
     Unknown(String),
+}
+
+impl ser::Serialize for Platform {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: ser::Serializer,
+    {
+        let platform = match self {
+            Platform::Mac => "mac",
+            Platform::Windows => "windows",
+            Platform::Unknown(s) => s,
+        };
+
+        serializer.serialize_str(platform)
+    }
 }
 
 impl<'de: 'a, 'a> de::Deserialize<'de> for Platform {
