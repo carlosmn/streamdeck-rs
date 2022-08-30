@@ -60,7 +60,7 @@ pub struct Manifest {
 }
 
 /// Describes an action available in this plugin.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Action {
     /// Relative path to a PNG without the suffix. Not required for actions not
@@ -91,7 +91,7 @@ pub struct Action {
 }
 
 /// Describes a state that a button might be in.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct State {
     /// Default image for the state.
@@ -155,14 +155,14 @@ pub struct OS {
 }
 
 /// Describes the Stream Deck software required by the plugin.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Software {
     /// Minimum version of the Stream Deck software supported by the plugin.
     pub minimum_version: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize)]
 pub enum TitleAlignment {
     #[serde(rename = "top")]
     Top,
@@ -172,7 +172,7 @@ pub enum TitleAlignment {
     Middle,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum FontStyle {
     Regular,
     Bold,
