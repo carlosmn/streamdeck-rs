@@ -1,8 +1,38 @@
 //! Types related to the property inspector
 
-use super::{GlobalSettingsPayload, KeyPayload, LogMessagePayload, UrlPayload};
+use super::{GlobalSettingsPayload, KeyPayload, LogMessagePayload, UrlPayload, Coordinates};
 
 use serde_derive::{Deserialize, Serialize};
+
+// This parameter is the same for both
+pub use super::RegistrationInfo;
+
+/// Additional information about the action
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(tag = "event", rename_all = "camelCase")]
+pub struct RegistrationActionInfoPayload<S> {
+    /// Persistent settings for the action
+    pub settings: S,
+    /// Coordinates of the action
+    pub coordinates: Coordinates,
+}
+
+/// Information about the action that the Property Inspector is acting on
+///
+/// The generic parameter S is the type of the action settings.
+///
+/// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/registration-procedure/#inactioninfo-parameter)
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(tag = "event", rename_all = "camelCase")]
+pub struct RegistrationActionInfo<S> {
+    /// The uuid of the action.
+    pub action: String,
+    /// Opaque value to use for sending messages to the app or plugin
+    pub context: String,
+    /// A unique value identifying the device
+    pub device: String,
+    pub payload: RegistrationActionInfoPayload<S>,
+}
 
 /// A message received from the Stream Deck software.
 ///
