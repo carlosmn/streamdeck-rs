@@ -3,6 +3,7 @@ pub use std::collections::HashMap;
 use serde_derive::{Deserialize, Serialize};
 
 pub use crate::DeviceType;
+use crate::registration::Platform;
 
 /// The data in the manifest.json file describing a plugin
 ///
@@ -148,7 +149,7 @@ impl Default for WindowSize {
 #[serde(rename_all = "PascalCase")]
 pub struct OS {
     /// Name of the platform, mac or windows
-    pub platform: String,
+    pub platform: Platform,
     /// Minimum version of the operating system supported.
     pub minimum_version: String,
 }
