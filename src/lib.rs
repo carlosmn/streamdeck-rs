@@ -550,7 +550,7 @@ pub struct TitleParameters {
 }
 
 /// The size of a device in keys.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeviceSize {
     /// The number of key columns on the device.
@@ -562,7 +562,7 @@ pub struct DeviceSize {
 /// The type of connected hardware device.
 ///
 /// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/manifest/#profiles)
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
 pub enum DeviceType {
     /// The [Stream Deck](https://www.elgato.com/en/gaming/stream-deck).
     StreamDeck, // 0

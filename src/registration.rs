@@ -151,7 +151,7 @@ pub struct RegistrationInfoPlugin {
 }
 
 /// The user's preferred colors
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Clone, Deserialize, Serialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct UserColors {
     button_pressed_background_color: Option<Color>,
