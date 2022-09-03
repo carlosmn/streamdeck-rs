@@ -8,7 +8,7 @@ use std::str::FromStr;
 /// Information about a connected device.
 ///
 /// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/registration-procedure/#info-parameter)
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct RegistrationInfoDevice {
     /// The ID of the specific device.
     pub id: String,
@@ -72,6 +72,25 @@ impl<'de> de::Deserialize<'de> for Language {
     }
 }
 
+impl ser::Serialize for Language {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: ser::Serializer,
+    {
+        let lang = match self {
+            Language::English => "en",
+            Language::French => "fr",
+            Language::German => "de",
+            Language::Spanish => "es",
+            Language::Japanese => "ja",
+            Language::ChineseChina => "zh_cn",
+            Language::Unknown(value) => value,
+        };
+
+        serializer.serialize_str(lang)
+    }
+}
+
 /// The platform on which the Stream Deck software is running.
 #[derive(Debug)]
 pub enum Platform {
@@ -131,7 +150,7 @@ impl<'de: 'a, 'a> de::Deserialize<'de> for Platform {
 /// Information about the Stream Deck software.
 ///
 /// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/registration-procedure/#info-parameter)
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct RegistrationInfoApplication {
     pub language: Language,
     pub platform: Platform,
@@ -151,7 +170,7 @@ pub struct RegistrationInfoPlugin {
 }
 
 /// The user's preferred colors
-#[derive(Clone, Deserialize, Serialize, Debug)]
+#[derive(Clone, Deserialize, Serialize, Debug, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UserColors {
     button_pressed_background_color: Option<Color>,
@@ -165,7 +184,7 @@ pub struct UserColors {
 /// Information about the environment the plugin is being loaded into.
 ///
 /// [Official Documentation](https://developer.elgato.com/documentation/stream-deck/sdk/registration-procedure/#info-parameter)
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegistrationInfo {
     pub application: RegistrationInfoApplication,
