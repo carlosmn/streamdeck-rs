@@ -12,7 +12,7 @@ pub use super::RegistrationInfo;
 #[serde(tag = "event", rename_all = "camelCase")]
 pub struct RegistrationActionInfoPayload<S> {
     /// Persistent settings for the action
-    setttings: S,
+    settings: S,
     /// Coordinates of the action
     coordinates: Coordinates,
 }
