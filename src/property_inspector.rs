@@ -12,9 +12,9 @@ pub use super::RegistrationInfo;
 #[serde(tag = "event", rename_all = "camelCase")]
 pub struct RegistrationActionInfoPayload<S> {
     /// Persistent settings for the action
-    settings: S,
+    pub settings: S,
     /// Coordinates of the action
-    coordinates: Coordinates,
+    pub coordinates: Coordinates,
 }
 
 /// Information about the action that the Property Inspector is acting on
@@ -26,12 +26,12 @@ pub struct RegistrationActionInfoPayload<S> {
 #[serde(tag = "event", rename_all = "camelCase")]
 pub struct RegistrationActionInfo<S> {
     /// The uuid of the action.
-    action: String,
+    pub action: String,
     /// Opaque value to use for sending messages to the app or plugin
-    context: String,
+    pub context: String,
     /// A unique value identifying the device
-    device: String,
-    payload: RegistrationActionInfoPayload<S>,
+    pub device: String,
+    pub payload: RegistrationActionInfoPayload<S>,
 }
 
 /// A message received from the Stream Deck software.
