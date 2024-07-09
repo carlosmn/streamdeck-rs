@@ -1,9 +1,13 @@
 #[cfg(feature = "logging")]
 pub mod logging;
+pub mod manifest;
+pub mod property_inspector;
 pub mod registration;
+pub mod runner;
 #[cfg(feature = "tokio-tungstenite")]
 pub mod socket;
 
+pub use crate::manifest::Manifest;
 pub use crate::registration::RegistrationInfo;
 #[cfg(feature = "tokio-tungstenite")]
 pub use crate::socket::StreamDeckSocket;
@@ -722,7 +726,7 @@ pub struct TitleParameters {
 }
 
 /// The size of a device in keys.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeviceSize {
     /// The number of key columns on the device.
@@ -734,7 +738,7 @@ pub struct DeviceSize {
 /// The type of connected hardware device.
 ///
 /// [Official Documentation](https://docs.elgato.com/sdk/plugins/manifest/#profiles)
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
 pub enum DeviceType {
     /// The [Stream Deck](https://www.elgato.com/en/gaming/stream-deck).
     StreamDeck, // 0
